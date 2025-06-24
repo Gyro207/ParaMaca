@@ -400,6 +400,8 @@ Y si cambias de opinion ya sabes que estoy aqui esperando por ti jsjsj.
 
     Pase lo que pase… nunca voy a olvidar este momento.<br />
     Gracias por existir y por ser parte de algo tan especial para mí. 🫶
+    <p>Yo ya te considero mi One Piece jajaj<br />
+      ("Eso significa que te voy a obligar a verte one piece conmigo :) ")<p>
     <p>(pdt:Tenia planeado mostrate esto en persona para escuchar tu respuesta 
       pero si no se puede necesito que me lo digas, por que no puedo ver lo que vas a elegir jsjsjs)<p>
   </p>
@@ -440,15 +442,19 @@ Y si cambias de opinion ya sabes que estoy aqui esperando por ti jsjsj.
   let currentPage = 0;
 
   function showPage(index) {
-    pages.forEach(page => page.style.display = 'none');
-    yesPage.style.display = 'none';
-    noPage.style.display = 'none';
+  pages.forEach(page => page.style.display = 'none');
+  yesPage.style.display = 'none';
+  noPage.style.display = 'none';
 
-    if(index >= 0 && index < pages.length){
-      pages[index].style.display = 'flex';
-      currentPage = index;
-    }
+  if(index >= 0 && index < pages.length){
+    pages[index].style.display = 'flex';
+    currentPage = index;
+
+    // Forzar scroll hacia arriba
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }
+}
+
 
   // Eventos para botón continuar y no continuar en página 1
   continueBtn1.addEventListener('click', () => showPage(2)); // Va a página2
@@ -467,11 +473,13 @@ Y si cambias de opinion ya sabes que estoy aqui esperando por ti jsjsj.
   yesBtn.addEventListener('click', () => {
     pages.forEach(p => p.style.display = 'none');
     yesPage.style.display = 'flex';
+    window.scrollTo({ top: 0, behavior: 'instant' }); 
   });
 
   noBtn.addEventListener('click', () => {
     pages.forEach(p => p.style.display = 'none');
     noPage.style.display = 'flex';
+    window.scrollTo({ top: 0, behavior: 'instant' }); 
   });
 
   // Eventos para los botones "Ir al final"
@@ -489,6 +497,19 @@ Y si cambias de opinion ya sabes que estoy aqui esperando por ti jsjsj.
       }
     }
   });
+  // Función para mover el botón aleatoriamente dentro de la ventana
+function moveButtonRandomly(button) {
+  const maxWidth = window.innerWidth - button.offsetWidth;
+  const maxHeight = window.innerHeight - button.offsetHeight;
+
+  const randomLeft = Math.floor(Math.random() * maxWidth);
+  const randomTop = Math.floor(Math.random() * maxHeight);
+
+  button.classList.add('moving');
+  button.style.left = `${randomLeft}px`;
+  button.style.top = `${randomTop}px`;
+}
+
 </script>
 </body>
 </html>
